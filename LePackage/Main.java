@@ -1,12 +1,8 @@
 package LePackage;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +18,7 @@ import LePackage.Calcul;
 
 public class Main {
 
-	public static void main(String[] args)  {
+	public static void main(String[] args) {
 
 		// crÃ©ation d'une liste
 		List<AR> maListeAR =  new ArrayList<AR>();
@@ -53,41 +49,34 @@ public class Main {
 
     	}
 
-    	String texteRequete = "select * from \"taxi\".tarif";
+    	String texteRequete = "select * from \"taxi\".dept";
 
 		// définition de l'objet qui récupérera le résultat de l'exécution de la requête :
 		ResultSet curseurResultat = null;
 		try {
 			curseurResultat = maReq.executeQuery(texteRequete);
-		} catch (SQLException e) {
 
-		}
-
-		// récupération des détails du résultats
-		try {
-			ResultSetMetaData detailsDonnees = curseurResultat.getMetaData();
 			// tant qu'il y a encore une ligne résultat à lire
 			while(curseurResultat.next()){
-				maListeAR.add(new AR(curseurResultat.getInt(0), curseurResultat.getDouble(1) ,Double.parseDouble(part[4]),Double.parseDouble(part[7]),
-						Double.parseDouble(part[2]),Double.parseDouble(part[5])));
-				maListeAS.add(new AS(Integer.parseInt(part[0]),Double.parseDouble(part[1]),Double.parseDouble(part[5]),Double.parseDouble(part[7]),
-						Double.parseDouble(part[3]),Double.parseDouble(part[6])));
+				maListeAR.add(new AR(curseurResultat.getInt(0), curseurResultat.getDouble(1) ,
+						curseurResultat.getDouble(4), curseurResultat.getDouble(7), curseurResultat.getDouble(2)
+						, curseurResultat.getDouble(5)));
+				maListeAS.add(new AS(curseurResultat.getInt(0), curseurResultat.getDouble(1) ,
+						curseurResultat.getDouble(5), curseurResultat.getDouble(7), curseurResultat.getDouble(3)
+						, curseurResultat.getDouble(6)));
 			 }
+
+			// on ferme le flux résultat
+			 curseurResultat.close();
+
+			// on ferme l'objet lié à la connexion
+			 maConnect.close();
 		} catch (SQLException e) {
-
+		    System.out.println("La requête ne retourne aucun résultat !!!");
+		    System.exit(0);
 		}
-
 
 		int i;
-		/*
-		// ajout d'Ã©lÃ©ments Ã  la liste
-		for (i=0;i<10;i++){
-			maListeAR.add(new AR((int)dept[i][0], dept[i][1], dept[i][4], dept[i][7],
-					dept[i][2], dept[i][5]));
-			maListeAS.add(new AS((int)dept[i][0], dept[i][1], dept[i][5], dept[i][7],
-					dept[i][3], dept[i][6]));
-		}
-		*/
 
 		Saisie maSaisie = new Saisie();
 
