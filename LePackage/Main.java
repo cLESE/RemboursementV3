@@ -2,6 +2,11 @@ package LePackage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,24 +22,30 @@ import LePackage.Calcul;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 
-		Class.forName("org.postgresql.Driver");
-		Connection DriverManager.getConnection(String URL, String userId, String mdp);
+		try{
+    		Class.forName("org.postgresql.Driver");
+    	} catch (Exception e) {
+    		System.out.println("Where is your PostgreSQL JDBC Driver? "
+					+ "Include in your library path!");
+			e.printStackTrace();
+    	}//Fin catch
+
+		Connection connection = null;
+		connection = DriverManager.getConnection("jdbc:postgresql://172..16.99.2:5432/csebillet","c.sebillet" ,"passe");
 
 
-		/*
-		double [][] dept = {{21, 2, 0.86, 1.72, 21.93, 1.29, 2.58, 21.93},
-							{25, 2.1, 0.83, 1.66, 22.5, 1.2, 2.4, 22.5},
-							{39, 2.1, 0.83, 1.66, 22.5, 1.23, 2.46, 25},
-							{44, 2.2, 0.79,	1.58, 24.19, 1.19, 2.37, 24.19},
-							{72, 2.15, 0.79, 1.58, 22.86, 1.19,	2.38, 22.86},
-							{73, 2.4, 0.84,	1.68, 25.4,	1.26, 2.52,	25.4},
-							{74, 3.15, 0.92, 1.84, 17.3, 1.38, 2.76, 17.3},
-							{75, 2.5, 1, 1.24, 0, 1.5, 1.5, 0},
-							{85, 2.3, 0.8, 1.6, 22.2, 1.2, 2.4,	22.2},
-							{90, 2.2, 0.83,1.66, 21, 1.15,	2.3, 21}};
-		*/
+		Statement maRequete = connection.createStatement();
+		String texteRequete = "select … from … where … ";
+
+		// définition de l'objet qui récupérera le résultat de l'exécution de la requête :
+
+		ResultSet curseurResultat = maRequete.executeQuery(texteRequete);
+
+		// récupération des détails du résultats
+
+		ResultSetMetaData detailsDonnees = curseurResultat.getMetaData();
 
 		// crÃ©ation d'une liste
 		List<AR> maListeAR =  new ArrayList<AR>();
