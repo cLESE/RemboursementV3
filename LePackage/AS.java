@@ -3,7 +3,7 @@ package LePackage;
 /**
  * AS est la classe comprenant toutes les données pour un aller simple.
  *
- * @author BaptisteDeslaurier
+ * @author Clément Sébillet
  * @version 1.0
  */
 

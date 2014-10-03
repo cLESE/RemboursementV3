@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Calcul est la classe comprenant le calcul du remboursement.
  *
- * @author BaptisteDeslaurier
+ * @author Clément Sébillet
  * @version 1.0
  */
 

@@ -3,7 +3,7 @@ package LePackage;
 /**
  * Saisie est la classe comprenant toute la saisie de l'utilisateur.
  *
- * @author BaptisteDeslaurier
+ * @author Clément Sébillet
  * @version 1.0
  */
 

@@ -1,6 +1,7 @@
 package LePackage;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,13 +11,17 @@ import LePackage.Calcul;
 /**
  * main est le programme principal qui va permettre la création des liste pour aller retour et aller simple, la saisie de l'utilisateur et le calcul du remboursement.
  *
- * @author BaptisteDeslaurier
+ * @author Clément Sébillet
  * @version 1.0
  */
 
 public class Main {
 
 	public static void main(String[] args) {
+
+		Class.forName("org.postgresql.Driver");
+		Connection DriverManager.getConnection(String URL, String userId, String mdp);
+
 
 		/*
 		double [][] dept = {{21, 2, 0.86, 1.72, 21.93, 1.29, 2.58, 21.93},
